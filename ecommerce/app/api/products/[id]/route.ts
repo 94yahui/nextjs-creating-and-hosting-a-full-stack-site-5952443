@@ -1,26 +1,22 @@
-import { NextRequest } from 'next/server';
-import { connectToDb } from '../../db';
+import { products } from "@/app/product-data";
+import { NextRequest } from "next/server";
 
 type Params = {
-  id: string;
+  id : string;
 }
-
-export async function GET(request: NextRequest, { params }: { params: Params }) {
-  const { db } = await connectToDb();
-  const productId = params.id;
-
-  const product = await db.collection('products').findOne({ id: productId });
+export async function GET(req: NextRequest, { params }: { params: Params }) {
+  
+  const product = products.find((p) => p.id === params.id);
 
   if (!product) {
-    return new Response('Product not found!', {
+    return new Response("Product not found", {
       status: 404,
     });
   }
-
   return new Response(JSON.stringify(product), {
     status: 200,
     headers: {
-      'Content-Type': 'application/json',
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 }

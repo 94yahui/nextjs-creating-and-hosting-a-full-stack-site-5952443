@@ -1,8 +1,8 @@
-export default function CheckoutPage() {
+export default function CheckOutPage() {
   return (
-    <div className="container mx-auto p-8 flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-4">Check Out</h1>
-      <p className="text-gray-600 text-center">This feature is coming soon!</p>
-    </div>
-  );
+    <div className="container mx-auto my-auto p-8 flex flex-col items-center gap-4">
+  <h1 className="text-6xl font-bold">Check Out</h1>
+  <p className="text-2xl">Checkout page coming soon...</p>
+  </div>
+)
 }
