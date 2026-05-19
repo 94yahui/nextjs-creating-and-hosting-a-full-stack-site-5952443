@@ -57,3 +57,21 @@ return new Response(JSON.stringify(cartProducts), {
   },
 });
 }
+
+export async function DELETE(req: NextRequest, { params }: { params: Promise<Params> }) {
+  const userId = (await params).id;
+  const body: CartBody = await req.json();
+  const productId = body.productId;
+
+  carts[userId] = carts[userId]?.filter(id => id !== productId) || [];
+  const cartProducts = carts[userId].map((id) =>
+    products.find((p) => p.id === id),
+  );
+
+  return new Response(JSON.stringify(cartProducts), {
+    status: 202,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

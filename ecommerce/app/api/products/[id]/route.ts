@@ -4,9 +4,12 @@ import { NextRequest } from "next/server";
 type Params = {
   id : string;
 }
-export async function GET(req: NextRequest, { params }: { params: Params }) {
-  
-  const product = products.find((p) => p.id === params.id);
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
+  const { id } = await params;
+  const product = products.find((p) => p.id === id);
 
   if (!product) {
     return new Response("Product not found", {
